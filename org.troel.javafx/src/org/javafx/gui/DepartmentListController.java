@@ -3,6 +3,7 @@ package org.javafx.gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.javafx.application.Main;
 import org.jdbc.model.entities.Department;
 
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class DepartmentListController implements Initializable {
 	
@@ -32,6 +35,15 @@ public class DepartmentListController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		initializeNodes();
+	}
+
+	private void initializeNodes() {
+		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		
+		Stage stage = (Stage) Main.getMainScene().getWindow();
+		tableViewDepartments.prefHeightProperty().bind(stage.heightProperty());
 	}
 
 }
