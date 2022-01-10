@@ -1,4 +1,4 @@
-package org.troel.model.dao.impl;
+package org.jdbc.model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.troel.db.DB;
-import org.troel.db.DBExeption;
-import org.troel.db.DBIntegrityExeption;
-import org.troel.model.dao.DepartmentDao;
-import org.troel.model.entities.Department;
+import org.jdbc.db.DB;
+import org.jdbc.db.DBExeption;
+import org.jdbc.db.DBIntegrityExeption;
+import org.jdbc.model.dao.DepartmentDao;
+import org.jdbc.model.entities.Department;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 

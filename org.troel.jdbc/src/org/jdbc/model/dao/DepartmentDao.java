@@ -1,8 +1,8 @@
-package org.troel.model.dao;
+package org.jdbc.model.dao;
 
 import java.util.List;
 
-import org.troel.model.entities.Department;
+import org.jdbc.model.entities.Department;
 
 public interface DepartmentDao {
 

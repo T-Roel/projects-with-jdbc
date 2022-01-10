@@ -1,4 +1,4 @@
-package org.troel.db;
+package org.jdbc.db;
 
 import java.io.FileInputStream;
 import java.io.IOException;

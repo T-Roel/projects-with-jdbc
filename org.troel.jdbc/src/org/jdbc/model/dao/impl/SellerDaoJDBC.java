@@ -1,4 +1,4 @@
-package org.troel.model.dao.impl;
+package org.jdbc.model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.troel.db.DB;
-import org.troel.db.DBExeption;
-import org.troel.model.dao.SellerDao;
-import org.troel.model.entities.Department;
-import org.troel.model.entities.Seller;
+import org.jdbc.db.DB;
+import org.jdbc.db.DBExeption;
+import org.jdbc.model.dao.SellerDao;
+import org.jdbc.model.entities.Department;
+import org.jdbc.model.entities.Seller;
 
 public class SellerDaoJDBC implements SellerDao {
 

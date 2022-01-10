@@ -1,14 +1,14 @@
-package org.troel.application;
+package org.jdbc.application;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import org.troel.model.dao.DaoFactory;
-import org.troel.model.dao.DepartmentDao;
-import org.troel.model.dao.SellerDao;
-import org.troel.model.entities.Department;
-import org.troel.model.entities.Seller;
+import org.jdbc.model.dao.DaoFactory;
+import org.jdbc.model.dao.DepartmentDao;
+import org.jdbc.model.dao.SellerDao;
+import org.jdbc.model.entities.Department;
+import org.jdbc.model.entities.Seller;
 
 public class Program {
 

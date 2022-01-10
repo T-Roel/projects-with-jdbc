@@ -1,11 +1,11 @@
-package org.troel.application;
+package org.jdbc.application;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.troel.db.DB;
-import org.troel.db.DBExeption;
+import org.jdbc.db.DB;
+import org.jdbc.db.DBExeption;
 
 public class Demo {
 

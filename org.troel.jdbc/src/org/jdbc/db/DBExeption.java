@@ -1,4 +1,4 @@
-package org.troel.db;
+package org.jdbc.db;
 
 public class DBExeption extends RuntimeException {
 

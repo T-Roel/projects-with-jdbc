@@ -1,9 +1,9 @@
-package org.troel.model.dao;
+package org.jdbc.model.dao;
 
 import java.util.List;
 
-import org.troel.model.entities.Department;
-import org.troel.model.entities.Seller;
+import org.jdbc.model.entities.Department;
+import org.jdbc.model.entities.Seller;
 
 public interface SellerDao {
 

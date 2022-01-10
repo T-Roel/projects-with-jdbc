@@ -1,4 +1,4 @@
-package org.troel.model.entities;
+package org.jdbc.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
