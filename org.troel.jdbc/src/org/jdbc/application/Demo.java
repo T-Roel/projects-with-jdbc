@@ -1,17 +1,17 @@
 package org.jdbc.application;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.jdbc.db.DB;
-import org.jdbc.db.DBExeption;
 
 public class Demo {
 
 	public static void main(String[] args) {
 
-		/*
+		
 		// RECUPERANDO DADOS
 		Connection conn = null;
 		Statement st = null;
@@ -23,7 +23,7 @@ public class Demo {
 			rs = st.executeQuery("SELECT * FROM department");
 			
 			while(rs.next()) {
-				System.out.println(rs.getInt("Id") + ", " + rs.getString("Name"));
+				System.out.println(rs.getInt("department_id") + ", " + rs.getString("Name"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -32,7 +32,7 @@ public class Demo {
 			DB.closeStatement(st);
 			DB.closeConnection();
 		}
-		*/
+		
 		
 		/*
 		// INSERINDO DADOS
@@ -123,39 +123,39 @@ public class Demo {
 		*/
 		
 		// TRANSACOES
-		Connection conn = null;
-		Statement st = null;
-		String firstUpdate = "UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1";
-		String secondUpdate = "UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2";
-		
-		try {
-			conn = DB.getConnection();
-			conn.setAutoCommit(false);
-			st = conn.createStatement();
-			
-			int rows1 = st.executeUpdate(firstUpdate);
-			
-			//int x = 1;
-			//if(x < 2) {
-			//	throw new SQLException("Fake error");
-			//}
-			
-			int rows2 = st.executeUpdate(secondUpdate);
-			
-			conn.commit();
-			
-			System.out.println("rows1: " + rows1);
-			System.out.println("rows2: " + rows2);
-		}catch(SQLException e) {
-			try {
-				conn.rollback();
-				throw new DBExeption("Transaction rolled back! Caused by: " + e.getMessage());
-			} catch (SQLException e1) {
-				throw new DBExeption("Error trying to rollback! Caused by: " + e1.getMessage());
-			}
-		}finally {
-			DB.closeStatement(st);
-			DB.closeConnection();
-		}
+//		Connection conn = null;
+//		Statement st = null;
+//		String firstUpdate = "UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1";
+//		String secondUpdate = "UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2";
+//		
+//		try {
+//			conn = DB.getConnection();
+//			conn.setAutoCommit(false);
+//			st = conn.createStatement();
+//			
+//			int rows1 = st.executeUpdate(firstUpdate);
+//			
+//			//int x = 1;
+//			//if(x < 2) {
+//			//	throw new SQLException("Fake error");
+//			//}
+//			
+//			int rows2 = st.executeUpdate(secondUpdate);
+//			
+//			conn.commit();
+//			
+//			System.out.println("rows1: " + rows1);
+//			System.out.println("rows2: " + rows2);
+//		}catch(SQLException e) {
+//			try {
+//				conn.rollback();
+//				throw new DBExeption("Transaction rolled back! Caused by: " + e.getMessage());
+//			} catch (SQLException e1) {
+//				throw new DBExeption("Error trying to rollback! Caused by: " + e1.getMessage());
+//			}
+//		}finally {
+//			DB.closeStatement(st);
+//			DB.closeConnection();
+//		}
 	}		
 }

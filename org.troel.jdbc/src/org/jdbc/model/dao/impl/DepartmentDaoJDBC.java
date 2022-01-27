@@ -17,11 +17,11 @@ import org.jdbc.model.entities.Department;
 public class DepartmentDaoJDBC implements DepartmentDao {
 
 	private Connection conn;
-	private static final String SQL_FIND_BY_ID = "SELECT * FROM department WHERE Id = ?";
+	private static final String SQL_FIND_BY_ID = "SELECT * FROM department WHERE department_id = ?";
 	private static final String SQL_FIND_ALL = "SELECT * FROM department ORDER BY Name";
 	private static final String SQL_INSERT = "INSERT INTO department (Name) VALUES (?)";
-	private static final String SQL_UPDATE = "UPDATE department SET Name = ? WHERE Id = ?";
-	private static final String SQL_DELETE = "DELETE FROM department WHERE Id = ?";
+	private static final String SQL_UPDATE = "UPDATE department SET Name = ? WHERE department_id = ?";
+	private static final String SQL_DELETE = "DELETE FROM department WHERE department_id = ?";
 	
 	public DepartmentDaoJDBC(Connection conn) {
 		this.conn = conn;
@@ -103,7 +103,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 			rs = st.executeQuery();
 			if (rs.next()) {
 				Department obj = new Department();
-				obj.setId(rs.getInt("Id"));
+				obj.setId(rs.getInt("department_id"));
 				obj.setName(rs.getString("Name"));
 				return obj;
 			}
@@ -130,7 +130,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
 			while (rs.next()) {
 				Department obj = new Department();
-				obj.setId(rs.getInt("Id"));
+				obj.setId(rs.getInt("department_id"));
 				obj.setName(rs.getString("Name"));
 				list.add(obj);
 			}
