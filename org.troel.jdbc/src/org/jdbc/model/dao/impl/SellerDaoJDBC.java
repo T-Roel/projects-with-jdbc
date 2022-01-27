@@ -20,12 +20,12 @@ public class SellerDaoJDBC implements SellerDao {
 
 	private Connection conn;
 	
-	private static final String SQL_FIND_BY_ID = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.DepartmentId = department.Id WHERE seller.Id = ?";
-	private static final String SQL_FIND_BY_DEPARTMENT = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.DepartmentId = department.Id WHERE DepartmentId = ? ORDER BY Name";
-	private static final String SQL_FIND_ALL = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.DepartmentId = department.Id ORDER BY Name";
-	private static final String SQL_INSERT = "INSERT INTO seller (Name, Email, BirthDate, BaseSalary, DepartmentId) VALUES (?, ?, ?, ?, ?)";
-	private static final String SQL_UPDATE = "UPDATE seller SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? WHERE Id = ?";
-	private static final String SQL_DELETE = "DELETE FROM seller WHERE Id = ?";
+	private static final String SQL_FIND_BY_ID = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.department_id = department.department_id WHERE seller.seller_id = ?";
+	private static final String SQL_FIND_BY_DEPARTMENT = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.department_id = department.department_id WHERE seller.department_id = ? ORDER BY Name";
+	private static final String SQL_FIND_ALL = "SELECT seller.*,department.Name as DepName FROM seller INNER JOIN department ON seller.department_id = department.department_id ORDER BY Name";
+	private static final String SQL_INSERT = "INSERT INTO seller (Name, Email, BirthDate, BaseSalary, department_id) VALUES (?, ?, ?, ?, ?)";
+	private static final String SQL_UPDATE = "UPDATE seller SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, department_id = ? WHERE seller_id = ?";
+	private static final String SQL_DELETE = "DELETE FROM seller WHERE seller_id = ?";
 	
 	public SellerDaoJDBC(Connection conn) {
 		this.conn = conn;
@@ -133,11 +133,11 @@ public class SellerDaoJDBC implements SellerDao {
 			Map<Integer, Department> map = new HashMap<>();
 			while (rs.next()) {
 				
-				Department depart = map.get(rs.getInt("DepartmentId"));
+				Department depart = map.get(rs.getInt("department_id"));
 				
 				if(depart == null) {
 					depart = instantiateDepartment(rs);
-					map.put(rs.getInt("DepartmentId"), depart);
+					map.put(rs.getInt("department_id"), depart);
 				}
 					
 				Seller obj = instantiateSeller(rs, depart);
@@ -165,11 +165,11 @@ public class SellerDaoJDBC implements SellerDao {
 			Map<Integer, Department> map = new HashMap<>();
 			while (rs.next()) {
 				
-				Department depart = map.get(rs.getInt("DepartmentId"));
+				Department depart = map.get(rs.getInt("department_id"));
 				
 				if(depart == null) {
 					depart = instantiateDepartment(rs);
-					map.put(rs.getInt("DepartmentId"), depart);
+					map.put(rs.getInt("department_id"), depart);
 				}
 					
 				Seller obj = instantiateSeller(rs, depart);
@@ -186,7 +186,7 @@ public class SellerDaoJDBC implements SellerDao {
 
 	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
 		Seller obj = new Seller();
-		obj.setId(rs.getInt("Id"));
+		obj.setId(rs.getInt("seller_id"));
 		obj.setName(rs.getString("Name"));
 		obj.setEmail(rs.getString("Email"));
 		obj.setBaseSalary(rs.getDouble("BaseSalary"));
@@ -197,7 +197,7 @@ public class SellerDaoJDBC implements SellerDao {
 
 	private Department instantiateDepartment(ResultSet rs) throws SQLException {
 		Department dep = new Department();
-		dep.setId(rs.getInt("DepartmentId"));
+		dep.setId(rs.getInt("department_id"));
 		dep.setName(rs.getString("DepName"));
 		return dep;
 	}
