@@ -1,11 +1,17 @@
 package org.javafx.gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
+import org.javafx.gui.listeners.DataChangeListener;
 import org.javafx.gui.utils.Alerts;
 import org.javafx.gui.utils.Constraints;
 import org.javafx.gui.utils.Utils;
+import org.javafx.model.exceptions.ValidationException;
 import org.jdbc.db.DBExeption;
 import org.jdbc.model.entities.Department;
 import org.jdbc.services.DepartmentService;
@@ -23,6 +29,8 @@ public class DepartmentFormController implements Initializable {
 	private Department entity;
 	
 	private DepartmentService service;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtId;
@@ -51,9 +59,12 @@ public class DepartmentFormController implements Initializable {
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDataChangeListeners();
 			Utils.currentStage(event).close();
 		} catch(DBExeption e) {
 			Alerts.showAlert("Error saving object", null, e.getMessage(), AlertType.ERROR);
+		} catch(ValidationException e) {
+			setErrorsMsg(e.getErrors());
 		}
 	}
 
@@ -68,6 +79,10 @@ public class DepartmentFormController implements Initializable {
 	
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
+	}
+	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
 	}
 	
 	@Override
@@ -90,8 +105,30 @@ public class DepartmentFormController implements Initializable {
 	
 	private Department getFormData() {
 		Department dept = new Department();
+		ValidationException e = new ValidationException("Validation Error");
+		
 		dept.setId(Utils.tryParseToInt(txtId.getText()));
+		
+		if(txtName.getText() == null || txtName.getText().isEmpty()) {
+			e.addError("Name", "Field can't be empty!");
+		}
 		dept.setName(txtName.getText());
+		
+		if(e.getErrors().size() > 0) {
+			throw e;
+		}
+		
 		return dept;
+	}
+	
+	private void notifyDataChangeListeners() {
+		dataChangeListeners.forEach(x -> x.onDataChanged());
+	}
+	
+	private void setErrorsMsg(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		if(fields.contains("Name")) {
+			labelErrorName.setText(errors.get("Name"));
+		}
 	}
 }
