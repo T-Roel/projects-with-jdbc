@@ -38,7 +38,7 @@ public class DB {
 	}
 
 	private static Properties loadProperties() {
-		try (FileInputStream fs = new FileInputStream("C:\\Users\\Usuario\\Documents\\ws-eclipse\\projects-with-jdbc\\org.troel.jdbc\\db.properties")) {
+		try (FileInputStream fs = new FileInputStream("C:\\Users\\Usuario\\Documents\\ws-eclipse\\projects-with-jdbc\\desktop_app\\org.troel.jdbc\\db.properties")) {
 			Properties props = new Properties();
 			props.load(fs);
 			return props;
