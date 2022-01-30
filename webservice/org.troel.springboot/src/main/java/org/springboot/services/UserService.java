@@ -1,0 +1,25 @@
+package org.springboot.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springboot.entities.User;
+import org.springboot.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	private UserRepository repository;
+	
+	public List<User> findAll() {
+		return repository.findAll();
+	}
+	
+	public User findById(Long userId) {
+		Optional<User> obj = repository.findById(userId);
+		return obj.get();
+	}
+}
